@@ -3,7 +3,6 @@
 import java.util.ArrayList;
 
 public class Matriz {
-	//private int tamanho = 0;
 	private ArrayList<Linha> linhas = new ArrayList<Linha>();
 	
 	public Matriz() {
@@ -18,6 +17,41 @@ public class Matriz {
 		Linha removida = linhas.get(0);
 		linhas.remove(0);
 		linhas.add(removida);
+	}
+	
+	public boolean divisaoValida () {
+		for (int i = 0; i < linhas.size(); i++) {
+			for (int j = 0; j < linhas.size(); j++) {
+				Linha l1 = linhas.get(i);
+				Linha l2 = linhas.get(j);
+				
+				if (i != j) {
+					Linha divisao = null;
+					
+					try {
+						divisao = l1.dividir(l2);
+					} catch (Exception e) {}
+					
+					ArrayList<Double> jaLidos = new ArrayList<Double>();
+					
+					for (int elem = 0; elem < divisao.getElem().size() - 1; elem++) {
+						if (jaLidos.contains(divisao.getElem().get(elem)))
+							return false;
+						jaLidos.add(divisao.getElem().get(elem));
+					}
+				}
+			}
+		}
+		return true;
+	}
+	
+	public boolean zerosNaDiagonalPrincipal () {
+		for (int i = 0; i < linhas.size(); i++) {
+			Linha l = linhas.get(i);
+			if (l.getElem().get(i) == 0)
+				return true;
+		}
+		return false;
 	}
 	
 	public void tornar1 (int linha) {
