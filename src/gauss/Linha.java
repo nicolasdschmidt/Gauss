@@ -9,6 +9,13 @@ public class Linha {
 		
 	}
 	
+	public Linha(String linha) {
+		String[] temp = linha.split(" ");
+		for (String obj : temp) {
+			adicionar(Double.parseDouble(obj));
+		}
+	}
+	
 	public void adicionar (double elem) {
 		elementos.add(elem);
 	}
