@@ -3,13 +3,30 @@
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
+/**
+ * <h1>Matriz</h1>
+ * Classe que representa e armazena uma lista de Linhas,
+ * representando um sistema de equações lineares. Possui
+ * métodos necessários para trabalhar com as Linhas e
+ * resolver o sistema.
+ */
 public class Matriz {
+	/**
+	 * A lista de Linhas da Matriz.
+	 */
 	private ArrayList<Linha> linhas = new ArrayList<Linha>();
 	
+	/**
+	 * Construtor de classe vazio.
+	 */
 	public Matriz() {
 		
 	}
 	
+	/**
+	 * Adiciona uma Linha ao fim da lista de linhas
+	 * @param elem a Linha a ser adicionada
+	 */
 	public void adicionar (Linha elem) {
 		linhas.add (elem);
 	}

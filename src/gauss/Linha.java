@@ -2,7 +2,17 @@
 
 import java.util.ArrayList;
 
+/**
+ * <h1>Linha</h1>
+ * Classe que representa e armazena uma equação do sistema
+ * de equações lineares. Possui métodos necessários para
+ * trabalhar com a equação, incluindo interação com outras
+ * Linhas.
+ */
 public class Linha {
+	/**
+	 * A lista de elementos da Linha.
+	 */
 	private ArrayList<Double> elementos = new ArrayList<Double>();
 	
 	/**
