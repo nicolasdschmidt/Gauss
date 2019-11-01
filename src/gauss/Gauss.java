@@ -28,10 +28,8 @@ public class Gauss {
 			if (m.zerosNaDiagonalPrincipal())
 				m.mudarOrdem();
 			
-			for (int i = 0; i < m.getElem().size(); i++) {
-				m.tornar1(i);
-				m.tornar0(i);
-			}
+			m.resolver();
+				
 			System.out.println("Resultado:");
 			System.out.println(m.resultado());
 			

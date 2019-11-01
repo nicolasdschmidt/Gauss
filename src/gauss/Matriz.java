@@ -75,7 +75,14 @@ public class Matriz {
 		return false;
 	}
 	
-	public void tornar1 (int linha) {
+	public void resolver () {
+		for (int i = 0; i < linhas.size(); i++) {
+			tornar1(i);
+			tornar0(i);
+		}
+	}
+	
+	private void tornar1 (int linha) {
 		Linha l = linhas.get(linha);
 		double elem = l.getElem().get(linha);
 		try {
@@ -84,7 +91,7 @@ public class Matriz {
 		linhas.set(linha, l);
 	}
 	
-	public void tornar0 (int coluna) {
+	private void tornar0 (int coluna) {
 		Linha lImplantada = linhas.get(coluna);
 		for (int i = 0; i < linhas.size(); i++) {
 			if (i != coluna) {
