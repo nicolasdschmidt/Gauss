@@ -14,7 +14,7 @@ Aplicação Java para resolver sistemas de equações lineares com qualquer quan
 2. Padronize as equações de modo que todas tenham as mesmas variáveis, na mesma ordem:
 ```
 0a + 3b + 2c = 28
-4a + 0g + 2c = 24
+4a + 0b + 2c = 24
 2a + 3b + 0c = 16
 ```
 3. Extraia do sistema os coeficientes e, com eles, monte uma matriz:
