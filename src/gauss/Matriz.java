@@ -13,10 +13,48 @@ public class Matriz {
 		linhas.add (elem);
 	}
 	
-	public void mudarOrdem() {
-		Linha removida = linhas.get(0);
+	public void mudarOrdem() throws Exception{
+		/*Linha removida = linhas.get(0);
 		linhas.remove(0);
-		linhas.add(removida);
+		linhas.add(removida);*/
+		if(!daPraTirarZeros())
+			throw new Exception("Impossivel de resolver");
+	}
+	
+	public boolean daPraTirarZeros () {
+		ArrayList<Linha> copia = (ArrayList<Linha>) linhas.clone();
+		while(temZero())
+		{
+			for(int i = 0; i < linhas.size(); i++)
+			{
+				if(linhas.get(i).getElem().get(i) == 0)	
+					for(int i2 = 0; i2 < linhas.size(); i2++)
+						if(linhas.get(i).getElem().get(i) == 0)
+						{
+							Linha removida = linhas.get(i);
+							linhas.set(i, linhas.get(i2));
+							linhas.set(i2, removida);
+						}
+			}
+			if(linhas.equals(copia))
+				return false;
+		}
+		return true;
+	}
+	
+	public boolean temZero()
+	{
+		for(int i = 0; i < linhas.size(); i++)
+		{
+			for(int j = 0; j < linhas.size(); j++)
+			{
+				if(linhas.get(i).getElem().get(j) == 0)
+				{
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 	
 	public boolean divisaoValida () {
