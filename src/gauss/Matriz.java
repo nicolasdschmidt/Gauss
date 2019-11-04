@@ -64,20 +64,18 @@ public class Matriz {
 				Linha l2 = linhas.get(j);
 				
 				if (i != j) {
+					
+					if (l1.equals(l2))
+						return false;
+					
 					Linha divisao = null;
 					
 					try {
 						divisao = l1.dividir(l2);
 					} catch (Exception e) {}
 					
-					ArrayList<Double> jaLidos = new ArrayList<Double>();
-					
-					for (int elem = 0; elem < divisao.getElem().size() - 1; elem++) {
-						if (!jaLidos.contains(divisao.getElem().get(elem)))
-							return true;
-						
-						jaLidos.add(divisao.getElem().get(elem));
-					}
+					if (divisao.todosElementosIguais())
+						return false;
 				}
 			}
 		}

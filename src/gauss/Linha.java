@@ -141,6 +141,17 @@ public class Linha {
 		return soma;
 	}
 	
+	public boolean todosElementosIguais () {
+		ArrayList<Double> jaLidos = new ArrayList<Double>();
+		jaLidos.add(elementos.get(0));
+		for (int i = 1; i < elementos.size(); i++) {
+			if (!jaLidos.contains(elementos.get(i)))
+				return false;
+			jaLidos.add(elementos.get(i));
+		}
+		return true;
+	}
+	
 	/**
 	 * Retorna a lista de elementos contida na Linha
 	 * @return a lista de elementos
@@ -185,7 +196,7 @@ public class Linha {
             return false;
 		
 		Linha l = (Linha) obj;
-        if (this.elementos != l.getElem())
+        if (!this.elementos.equals(l.getElem()))
             return false;
 
         return true;
