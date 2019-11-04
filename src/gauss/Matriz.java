@@ -73,8 +73,9 @@ public class Matriz {
 					ArrayList<Double> jaLidos = new ArrayList<Double>();
 					
 					for (int elem = 0; elem < divisao.getElem().size() - 1; elem++) {
-						if (jaLidos.contains(divisao.getElem().get(elem)))
-							return false;
+						if (!jaLidos.contains(divisao.getElem().get(elem)))
+							return true;
+						
 						jaLidos.add(divisao.getElem().get(elem));
 					}
 				}

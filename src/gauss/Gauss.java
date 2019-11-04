@@ -22,7 +22,7 @@ public class Gauss {
 			System.out.println();
 		
 			if (!m.divisaoValida()) {
-				throw new Exception("O sistema é indefinido ou impossível");
+				throw new Exception("O sistema é indeterminado ou impossível");
 			}
 			
 			if (m.zerosNaDiagonalPrincipal())
