@@ -30,13 +30,8 @@ public class Matriz {
 	public void adicionar (Linha elem) {
 		linhas.add (elem);
 	}
-	
-	public void mudarOrdem() throws Exception{
-		if(!daPraTirarZeros())
-			throw new Exception("Impossivel de resolver");
-	}
 
-	public boolean daPraTirarZeros () {
+	public void mudarOrdem () throws Exception {
 		ArrayList<Linha> copia = (ArrayList<Linha>) linhas.clone();
 		while(zerosNaDiagonalPrincipal())
 		{
@@ -52,9 +47,8 @@ public class Matriz {
 						}
 			}
 			if(linhas.equals(copia))
-				return false;
+				throw new Exception ("Não foi possível remover todos os zeros da diagonal principal");
 		}
-		return true;
 	}
 	
 	public boolean divisaoValida () {
