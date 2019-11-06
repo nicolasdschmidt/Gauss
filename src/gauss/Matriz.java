@@ -44,7 +44,7 @@ public class Matriz {
 			{
 				if(linhas.get(i).getElem().get(i) == 0)	
 					for(int i2 = 0; i2 < linhas.size(); i2++)
-						if(linhas.get(i).getElem().get(i) == 0)
+						if(linhas.get(i2).getElem().get(i) != 0)
 						{
 							Linha removida = linhas.get(i);
 							linhas.set(i, linhas.get(i2));
@@ -177,7 +177,12 @@ public class Matriz {
 							ret += " - ";
 					}
 					ret += new DecimalFormat("##.###").format(Math.abs(valor));
-					ret += (char)(j+'a');
+					if (j < 26)
+						ret += (char)(j+'a');
+					else if (j < 52)
+						ret += (char)(j-26+'A');
+					else
+						ret += "*";
 					numValores++;
 				}
 			}
