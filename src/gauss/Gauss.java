@@ -14,24 +14,28 @@
 public class Gauss {
 	public static void main(String[] args) {
 		try {
+			double inicio = System.currentTimeMillis();
 			Leitor l = new Leitor("input.txt");
 			Matriz m = l.lerSistema();
 			
 			System.out.println("Sistema lido:");
 			System.out.println(m);
 			System.out.println();
-		
+			
 			if (!m.divisaoValida()) {
 				throw new Exception("O sistema é indeterminado ou impossível");
 			}
 			
-			if (m.zerosNaDiagonalPrincipal())
-				m.mudarOrdem();
+			if (m.primeiroZeroNaDiagonalPrincipal() >= 0)
+				m.tirarZeros();
 			
 			m.resolver();
-				
+			
 			System.out.println("Resultado:");
 			System.out.println(m.resultado());
+			double fim = System.currentTimeMillis();
+			
+			System.out.println("Tempo total: " + (fim - inicio) / 1000 + "s");
 			
 		} catch (Exception erro) {
 			System.err.println("Erro: " + erro.getMessage());

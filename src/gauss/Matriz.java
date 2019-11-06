@@ -30,11 +30,39 @@ public class Matriz {
 	public void adicionar (Linha elem) {
 		linhas.add (elem);
 	}
-
-	public void mudarOrdem () throws Exception {
-		ArrayList<Linha> copia = (ArrayList<Linha>) linhas.clone();
+	
+	public void tirarZeros () throws Exception{
+		Matriz copia = this.clone();
+		int onde = primeiroZeroNaDiagonalPrincipal();
+		while(onde >= 0)
+		{
+			if(linhas.get(onde).getElem().get(onde) == 0)	
+				for(int i = 0; i < linhas.size(); i++)
+					if(linhas.get(i).getElem().get(onde) != 0)
+					{
+						Linha removida = new Linha(linhas.get(onde));
+						linhas.set(onde, linhas.get(i));
+						linhas.set(i, removida);
+					}
+			if(this.equals(copia))
+				throw new Exception("Impossível de retirar todos os zeros da diagonal principal!");
+			onde = primeiroZeroNaDiagonalPrincipal();
+		}
+	}
+	
+	/*public void mudarOrdem () throws Exception {
+		//ArrayList<Linha> copia = (ArrayList<Linha>) linhas.clone();
+		Matriz copia = this.clone();
+		//int i = 0;
 		while(zerosNaDiagonalPrincipal())
 		{
+			Linha removida = linhas.remove(0);
+			linhas.add(removida);
+			
+			if (i > this.getTamanho())
+				throw new Exception ("Deu não");
+			
+			i++;
 			for(int i = 0; i < linhas.size(); i++)
 			{
 				if(linhas.get(i).getElem().get(i) == 0)	
@@ -49,7 +77,7 @@ public class Matriz {
 			if(linhas.equals(copia))
 				throw new Exception ("Não foi possível remover todos os zeros da diagonal principal");
 		}
-	}
+	}*/
 	
 	public boolean divisaoValida () {
 		for (int i = 0; i < linhas.size(); i++) {
@@ -76,13 +104,21 @@ public class Matriz {
 		return true;
 	}
 	
-	public boolean zerosNaDiagonalPrincipal () {
+	/*public boolean zerosNaDiagonalPrincipal () {
 		for (int i = 0; i < linhas.size(); i++) {
 			Linha l = linhas.get(i);
 			if (l.getElem().get(i) == 0)
 				return true;
 		}
 		return false;
+	}*/
+	public int primeiroZeroNaDiagonalPrincipal () {
+		for (int i = 0; i < linhas.size(); i++) {
+			Linha l = linhas.get(i);
+			if (l.getElem().get(i) == 0)
+				return i;//retorna a posição do zero encontrado na diagonal principal
+		}
+		return -1;//se não existir nenhum zero na diagonal principal retorna -1
 	}
 	
 	public void resolver () {
@@ -118,7 +154,12 @@ public class Matriz {
 	public String resultado () {
 		String ret = "";
 		for (int i = 0; i < linhas.size(); i++) {
-			ret += (char)(i+'a');
+			if (i < 26)
+				ret += (char)(i + 'a');
+			else if (i < 52)
+				ret += (char)(i - 26 + 'A');
+			else
+				ret += "(x" + (i - 52) + ")";
 			ret += " = ";
 			ret += new DecimalFormat("##.###").format(linhas.get(i).getElem().get(linhas.get(i).getElem().size() - 1));
 			ret += "\n";
@@ -172,11 +213,11 @@ public class Matriz {
 					}
 					ret += new DecimalFormat("##.###").format(Math.abs(valor));
 					if (j < 26)
-						ret += (char)(j+'a');
+						ret += (char)(j + 'a');
 					else if (j < 52)
-						ret += (char)(j-26+'A');
+						ret += (char)(j - 26 + 'A');
 					else
-						ret += "*";
+						ret += "(x" + (j - 52) + ")";
 					numValores++;
 				}
 			}
