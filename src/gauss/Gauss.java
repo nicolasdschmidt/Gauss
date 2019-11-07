@@ -73,7 +73,7 @@ public class Gauss {
 			
 			double tempo = fim - inicio;
 			int minutos = (int) (tempo / (60 * 1000));
-			int segundos = (int) ((tempo / 1000) % 60);
+			double segundos = (double) ((tempo / 1000) % 60);
 			System.out.print("Tempo total: ");
 			if (minutos > 0)
 				System.out.print(minutos + "min");
