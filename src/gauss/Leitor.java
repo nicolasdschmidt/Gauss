@@ -9,6 +9,9 @@ public class Leitor {
 	 * Lê o arquivo texto que tem os dados do sistema
 	 * de equações que será resolvido
 	 * @param arquivo o endereço do arquivo que será lido
+	 * @return retorna um objeto da classe Matriz
+	 * @throw lança uma exceção caso o arquivo passado pelo usuário não exista
+	 * ou caso ocorra algum erro ao armazenar dados em objetos da classe Linha
 	 */
 	public static Matriz lerSistema (String arquivo) throws Exception {//Método para ler o arquivo com o sistema de equações lineares
 		
