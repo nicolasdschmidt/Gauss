@@ -3,15 +3,10 @@ package gauss;
 import java.io.BufferedReader;
 import java.io.FileReader;
 
-public class Leitor {
+public static class Leitor {
 	
-	private BufferedReader leitor;
-	
-	public Leitor (String arquivo) throws Exception {
-		this.leitor = new BufferedReader (new FileReader (arquivo));
-	}
-	
-	public Matriz lerSistema () throws Exception {
+	public static Matriz lerSistema (String arquivo) throws Exception {
+		 BufferedReader leitor = new BufferedReader (new FileReader (arquivo));
 		int qtdEquacoes = Integer.parseInt(leitor.readLine());
 		
 		Matriz m = new Matriz();
@@ -24,4 +19,5 @@ public class Leitor {
 		
 		return m;
 	}
+	
 }
