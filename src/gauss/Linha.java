@@ -141,6 +141,11 @@ public class Linha {
 		return soma;
 	}
 	
+	/**
+	 * Verifica se todos os elementos da Linha
+	 * são iguais.
+	 * @return se todos os elementos são iguais
+	 */
 	public boolean todosElementosIguais () {
 		ArrayList<Double> jaLidos = new ArrayList<Double>();
 		jaLidos.add(elementos.get(0));
