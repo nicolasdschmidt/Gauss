@@ -34,6 +34,15 @@ public class Gauss {
 			else if (m.getTamanho() >= 1500)
 				System.out.println(">2min");
 			else {
+				/* estima o tempo necessário para resolver o sistema de equações
+				 * 
+				 * para isso, coletamos alguns tempos reais de resolução e montamos
+				 * um gráfico de dispersão;
+				 * calculamos a linha de tendência do gráfico usando um polinômio do
+				 * 2º grau;
+				 * usamos a função geradora (f(x) = 0.0703x² - 30.724x + 3203.2) dessa
+				 * linha para realizar a estimativa.
+				 */
 				long tempo = Math.round((0.0703 * Math.pow(m.getTamanho(), 2) - 30.724 * m.getTamanho() + 3203.2));
 				int minutos = (int) (tempo / (60 * 1000));
 				int segundos = (int) ((tempo / 1000) % 60);
