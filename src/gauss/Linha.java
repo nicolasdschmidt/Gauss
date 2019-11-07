@@ -13,14 +13,12 @@ public class Linha {
 	/**
 	 * A lista de elementos da Linha.
 	 */
-	private ArrayList<Double> elementos = new ArrayList<Double>();
+	private ArrayList<Double> elementos = new ArrayList<Double>(); // Armazena os elementos de cada equação linear
 	
 	/**
 	 * Construtor de classe vazio.
 	 */
-	public Linha() {
-		
-	}
+	public Linha() {}
 	
 	/**
 	 * Construtor de classe por String.
@@ -28,9 +26,9 @@ public class Linha {
 	 * de uma equação, com ordem padronizada.
 	 */
 	public Linha(String linha) {
-		String[] temp = linha.split(" ");
+		String[] temp = linha.split(" "); // armazena os dados da linha recebida no vetor de String temp
 		for (String obj : temp) {
-			adicionar(Double.parseDouble(obj));
+			adicionar(Double.parseDouble(obj)); // adiciona todos os dados do vetor temp para dentro do array list elementos
 		}
 	}
 	
@@ -39,7 +37,7 @@ public class Linha {
 	 * @param elem o elemento a ser adicionado
 	 */
 	public void adicionar (double elem) {
-		elementos.add(elem);
+		elementos.add(elem); // adiciona o dado elem ao array list elementos
 	}
 	
 	/**
@@ -56,7 +54,7 @@ public class Linha {
 	 * @param valor o valor para essa posição
 	 */
 	public void setElem (int index, double valor) {
-		elementos.set(index, valor);
+		elementos.set(index, valor); // altera o dado na posição index no array list elementos para o dado valor
 	}
 	
 	/**
@@ -71,12 +69,12 @@ public class Linha {
 	 */
 	public Linha dividir (Linha outra) throws Exception {
 		if (this.elementos.size() != outra.elementos.size())
-			throw new Exception ("Linhas têm tamanhos diferentes");
+			throw new Exception ("Linhas têm tamanhos diferentes"); // lança exceção se as linhas outra e this tiverem tamanhos diferentes
 		
 		Linha divisao = new Linha();
 		
 		for (int i = 0; i < this.elementos.size(); i++) {
-			divisao.adicionar(this.elementos.get(i) / outra.elementos.get(i));
+			divisao.adicionar(this.elementos.get(i) / outra.elementos.get(i)); // adiciona à Linha divisao o dado do array list elementos de this dividido pelo dado do array list elementos da outra linha
 		}
 		
 		return divisao;
@@ -94,8 +92,9 @@ public class Linha {
 		Linha divisao = new Linha();
 		
 		for (int i = 0; i < this.elementos.size(); i++) {
-			divisao.adicionar(this.elementos.get(i) / num);
+			divisao.adicionar(this.elementos.get(i) / num); // adiciona à Linha divisao o dado do array list elementos de this dividido por um número double num
 		}
+	}
 		
 		return divisao;
 	}
@@ -112,7 +111,7 @@ public class Linha {
 		Linha multiplicacao = new Linha();
 		
 		for (int i = 0; i < this.elementos.size(); i++) {
-			multiplicacao.adicionar(this.elementos.get(i) * num);
+			multiplicacao.adicionar(this.elementos.get(i) * num); // adiciona à Linha multiplicacao o dado do array list elementos de this multiplicado por um número double num
 		}
 		
 		return multiplicacao;
@@ -129,13 +128,13 @@ public class Linha {
 	 * número de elementos
 	 */
 	public Linha somar (Linha outra) throws Exception {
-		if (this.elementos.size() != outra.elementos.size())
+		if (this.elementos.size() != outra.elementos.size()) // lança exceção se as linhas outra e this tiverem tamanhos diferentes
 			throw new Exception ("Linhas têm tamanhos diferentes");
 		
 		Linha soma = new Linha();
 		
 		for (int i = 0; i < this.elementos.size(); i++) {
-			soma.adicionar(this.elementos.get(i) + outra.elementos.get(i));
+			soma.adicionar(this.elementos.get(i) + outra.elementos.get(i)); // adiciona à Linha soma o dado do array list elementos de this somado ao dado do array list elementos da outra linha
 		}
 		
 		return soma;
@@ -169,8 +168,8 @@ public class Linha {
 		if (modelo == null)
 			throw new Exception ("Modelo ausente");
 		
-		for (double obj : modelo.elementos) {
-			this.adicionar(obj);
+		for (double obj : modelo.elementos) { // para cada objeto double dentro dos elementos do modelo
+			this.adicionar(obj); // adiciona o obj ao array list elementos de this
 		}
 	}
 	
