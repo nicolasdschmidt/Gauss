@@ -94,7 +94,6 @@ public class Linha {
 		for (int i = 0; i < this.elementos.size(); i++) {
 			divisao.adicionar(this.elementos.get(i) / num); // adiciona à Linha divisao o dado do array list elementos de this dividido por um número double num
 		}
-	}
 		
 		return divisao;
 	}
