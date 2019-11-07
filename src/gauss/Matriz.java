@@ -17,6 +17,11 @@ public class Matriz {
 	private ArrayList<Linha> linhas = new ArrayList<Linha>();
 	
 	/**
+	 * Se a matriz já foi resolvida.
+	 */
+	private boolean resolvida = false;
+	
+	/**
 	 * Construtor de classe vazio.
 	 */
 	public Matriz() {
@@ -24,14 +29,19 @@ public class Matriz {
 	}
 	
 	/**
-	 * Adiciona uma Linha ao fim da lista de linhas
+	 * Adiciona uma Linha ao fim da lista de linhas.
 	 * @param elem a Linha a ser adicionada
 	 */
 	public void adicionar (Linha elem) {
 		linhas.add (elem);
 	}
 	
-	public void tirarZeros () throws Exception{
+	/**
+	 * Reorganiza a matriz de modo que não haja zeros na
+	 * diagonal principal.
+	 * @throws Exception caso não consiga reorganizar a matriz
+	 */
+	public void tirarZeros () throws Exception {
 		Matriz copia = this.clone();
 		int onde = primeiroZeroNaDiagonalPrincipal();
 		while(onde >= 0)
@@ -50,35 +60,12 @@ public class Matriz {
 		}
 	}
 	
-	/*public void mudarOrdem () throws Exception {
-		//ArrayList<Linha> copia = (ArrayList<Linha>) linhas.clone();
-		Matriz copia = this.clone();
-		//int i = 0;
-		while(zerosNaDiagonalPrincipal())
-		{
-			Linha removida = linhas.remove(0);
-			linhas.add(removida);
-			
-			if (i > this.getTamanho())
-				throw new Exception ("Deu não");
-			
-			i++;
-			for(int i = 0; i < linhas.size(); i++)
-			{
-				if(linhas.get(i).getElem().get(i) == 0)	
-					for(int i2 = 0; i2 < linhas.size(); i2++)
-						if(linhas.get(i2).getElem().get(i) != 0)
-						{
-							Linha removida = linhas.get(i);
-							linhas.set(i, linhas.get(i2));
-							linhas.set(i2, removida);
-						}
-			}
-			if(linhas.equals(copia))
-				throw new Exception ("Não foi possível remover todos os zeros da diagonal principal");
-		}
-	}*/
 	
+	/**
+	 * Verifica se não existe um dupla de linhas em que
+	 * os quocientes da divisão dos valores são todos iguais.
+	 * @return se o sistema é válido
+	 */
 	public boolean divisaoValida () {
 		for (int i = 0; i < linhas.size(); i++) {
 			for (int j = 0; j < linhas.size(); j++) {
@@ -104,31 +91,40 @@ public class Matriz {
 		return true;
 	}
 	
-	/*public boolean zerosNaDiagonalPrincipal () {
-		for (int i = 0; i < linhas.size(); i++) {
-			Linha l = linhas.get(i);
-			if (l.getElem().get(i) == 0)
-				return true;
-		}
-		return false;
-	}*/
+	/**
+	 * Retorna a posição do primeiro zero encontrado
+	 * na diagonal principal do sistema de equações.
+	 * @return a posição do primeiro zero na diagonal principal
+	 */
 	public int primeiroZeroNaDiagonalPrincipal () {
 		for (int i = 0; i < linhas.size(); i++) {
 			Linha l = linhas.get(i);
 			if (l.getElem().get(i) == 0)
-				return i;//retorna a posição do zero encontrado na diagonal principal
+				return i; // retorna a posição do zero
 		}
-		return -1;//se não existir nenhum zero na diagonal principal retorna -1
+		return -1; // se não encontrar, retorna -1
 	}
 	
+	/**
+	 * Executa os métodos necessários para
+	 * resolver o sistema de equações.
+	 */
 	public void resolver () {
 		for (int i = 0; i < linhas.size(); i++) {
-			tornar1(i);
-			tornar0(i);
+			tornarUm(i);
+			tornarZero(i);
 		}
 	}
 	
-	private void tornar1 (int linha) {
+	/**
+	 * Passo 6 do método de Gauss-Seidel.
+	 * <p>
+	 * Torna 1 os elementos da diagonal principal
+	 * na linha especificada, dividindo toda a
+	 * linha pelo elemento a ser tornado 1.
+	 * @param linha a linha na qual executar esse procedimento
+	 */
+	private void tornarUm (int linha) {
 		Linha l = linhas.get(linha);
 		double elem = l.getElem().get(linha);
 		try {
@@ -137,7 +133,15 @@ public class Matriz {
 		linhas.set(linha, l);
 	}
 	
-	private void tornar0 (int coluna) {
+	/**
+	 * Passo 7 do método de Gauss-Seidel.
+	 * <p>
+	 * Torna 0 os elementos da coluna especificada,
+	 * com exceção do elemento que está na diagonal
+	 * principal, que resulta em 1.
+	 * @param coluna a coluna na qual executar esse procedimento
+	 */
+	private void tornarZero (int coluna) {
 		Linha lImplantada = linhas.get(coluna);
 		for (int i = 0; i < linhas.size(); i++) {
 			if (i != coluna) {
@@ -151,7 +155,15 @@ public class Matriz {
 		}
 	}
 	
-	public String resultado () {
+	/**
+	 * Se chamado depois do método {@code resolver()},
+	 * retorna as soluções do sistema de equações.
+	 * @return a última coluna da matriz
+	 * @throws Exception caso o sistema ainda não tenha sido resolvido
+	 */
+	public String resultado () throws Exception {
+		if (!resolvida)
+			throw new Exception ("O sistema ainda não foi resolvido");
 		String ret = "";
 		for (int i = 0; i < linhas.size(); i++) {
 			if (i < 26)
@@ -168,16 +180,27 @@ public class Matriz {
 		return ret;
 	}
 	
+	/**
+	 * Retorna o tamanho do sistema.
+	 * @return o número de Linhas na matriz
+	 */
 	public int getTamanho () {
 		return linhas.size();
 	}
 	
-	@SuppressWarnings("unchecked")
+	/**
+	 * Retorna a lista de Linhas contida na Matriz.
+	 * @return a lista de Linhas
+	 */
 	public ArrayList<Linha> getElem () {
 		return (ArrayList<Linha>) linhas.clone();
 	}
 	
-	
+	/**
+	 * Construtor de cópia da classe.
+	 * @param modelo Matriz para copiar
+	 * @throws Exception caso o modelo esteja ausente
+	 */
 	public Matriz (Matriz modelo) throws Exception {
 		if (modelo == null)
 			throw new Exception ("Modelo ausente");
@@ -196,6 +219,30 @@ public class Matriz {
 		catch (Exception erro) {}
 		
 		return clone;
+	}
+	
+	public boolean equals (Object obj) {
+		if (this == obj)
+			return true;
+		
+		if (obj == null)
+			return false;
+		
+		if (this.getClass() != obj.getClass())
+            return false;
+		
+		Matriz m = (Matriz) obj;
+        if (!this.linhas.equals(m.getElem()))
+            return false;
+
+        return true;
+	}
+	
+	public int hashCode () {
+		int ret = 666;
+		ret = ret * 13 + this.linhas.hashCode();
+		
+		return ret;
 	}
 	
 	public String toString () {

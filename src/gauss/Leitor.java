@@ -1,4 +1,4 @@
-package gauss;
+ï»¿package gauss;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -6,32 +6,33 @@ import java.io.FileReader;
 public class Leitor {
 	
 	/**
-	 * Lê o arquivo texto que tem os dados do sistema
-	 * de equações que será resolvido
-	 * @param arquivo o endereço do arquivo que será lido
+	 * LÃª o arquivo texto que tem os dados do sistema
+	 * de equaÃ§Ãµes que serÃ¡ resolvido
+	 * @param arquivo o endereÃ§o do arquivo que serÃ¡ lido
 	 * @return retorna um objeto da classe Matriz
-	 * @throw lança uma exceção caso o arquivo passado pelo usuário não exista
-	 * ou caso ocorra algum erro ao armazenar dados em objetos da classe Linha
+	 * @throws FileNotFoundException caso o arquivo nÃ£o exista
+	 * @throws IOException caso nÃ£o seja possÃ­vel ler alguma linha do arquivo
 	 */
-	public static Matriz lerSistema (String arquivo) throws Exception {//Método para ler o arquivo com o sistema de equações lineares
+	public static Matriz lerSistema (String arquivo) throws Exception {
 		
-		BufferedReader leitor = new BufferedReader (new FileReader (arquivo));//instanciação de um buffered reader para ler o arquivo
+		BufferedReader leitor = new BufferedReader (new FileReader (arquivo));
 		 
-		int qtdEquacoes = Integer.parseInt(leitor.readLine());//número de equações lineares no arquivo texto
+		int qtdEquacoes = Integer.parseInt(leitor.readLine());
+		// lÃª o nÃºmero de equaÃ§Ãµes no arquivo, de modo a ler o nÃºmero correto de linhas
 		
-		Matriz m = new Matriz();//instanciação da matriz que armazenará os dados
+		Matriz m = new Matriz();
 		
-		for (int i = 0; i < qtdEquacoes; i++) {//enquanto a quantidade de linhas lidas for menor que o número de equações do arquivo
+		for (int i = 0; i < qtdEquacoes; i++) {	// enquanto o arquivo nÃ£o deve acabar
 			
-			String lida = leitor.readLine();//a linha atual do arquivo é armazenada na String lida
-			
-			Linha atual = new Linha(lida);//armazenamento dos dados da linha lida em um objeto da classe Linha
-			
-			m.adicionar(atual);//armazena a Linha atual na matriz
+			String lida = leitor.readLine();	// lÃª a prÃ³xima linha
+			Linha atual = new Linha(lida);		// instancia uma Linha usando a String lida
+			m.adicionar(atual);					// armazena a Linha atual na Matriz m
 			
 		}
 		
-		return m;//retorna a Matriz m
+		leitor.close();
+		
+		return m; 
 	}
 	
 }

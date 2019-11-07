@@ -15,8 +15,7 @@ public class Gauss {
 	public static void main(String[] args) {
 		try {
 			double inicio = System.currentTimeMillis();
-			Leitor l = new Leitor("input.txt");
-			Matriz m = l.lerSistema();
+			Matriz m = Leitor.lerSistema("input.txt");
 			
 			System.out.println("Sistema lido:");
 			System.out.println(m);
