@@ -44,7 +44,8 @@ public class Matriz {
 	public void tirarZeros () throws Exception {
 		Matriz copia = this.clone();
 		int onde = primeiroZeroNaDiagonalPrincipal();
-		while(onde >= 0)
+		int iteracoes = 0;
+		while(onde >= 0 && iteracoes < linhas.size())
 		{
 			if(linhas.get(onde).getElem().get(onde) == 0)	
 				for(int i = 0; i < linhas.size(); i++)
@@ -57,6 +58,7 @@ public class Matriz {
 			if(this.equals(copia))
 				throw new Exception("Impossível de retirar todos os zeros da diagonal principal!");
 			onde = primeiroZeroNaDiagonalPrincipal();
+			iteracoes++;
 		}
 	}
 	
@@ -68,7 +70,7 @@ public class Matriz {
 	 */
 	public boolean divisaoValida () {
 		for (int i = 0; i < linhas.size(); i++) {
-			for (int j = 0; j < linhas.size(); j++) {
+			for (int j = i; j < linhas.size(); j++) {
 				Linha l1 = linhas.get(i);
 				Linha l2 = linhas.get(j);
 				
@@ -114,6 +116,7 @@ public class Matriz {
 			tornarUm(i);
 			tornarZero(i);
 		}
+		this.resolvida = true;
 	}
 	
 	/**
