@@ -30,6 +30,8 @@ public class Leitor {
 			
 		}
 		
+		leitor.close();
+		
 		return m; 
 	}
 	
