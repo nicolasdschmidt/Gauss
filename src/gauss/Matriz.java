@@ -45,10 +45,10 @@ public class Matriz {
 		Matriz copia = this.clone();
 		int onde = primeiroZeroNaDiagonalPrincipal();
 		int iteracoes = 0;
-		while(onde >= 0 && iteracoes < linhas.size())
+		while(onde >= 0 && iteracoes <= linhas.size())
 		{
 			if(linhas.get(onde).getElem().get(onde) == 0)	
-				for(int i = 0; i < linhas.size(); i++)
+				for(int i = onde; i < linhas.size(); i++)
 					if(linhas.get(i).getElem().get(onde) != 0)
 					{
 						Linha removida = new Linha(linhas.get(onde));
@@ -56,10 +56,13 @@ public class Matriz {
 						linhas.set(i, removida);
 					}
 			if(this.equals(copia))
-				throw new Exception("Impossível de retirar todos os zeros da diagonal principal!");
+				throw new Exception("Impossível retirar todos os zeros da diagonal principal!");
 			onde = primeiroZeroNaDiagonalPrincipal();
 			iteracoes++;
 		}
+		onde = primeiroZeroNaDiagonalPrincipal();
+		if (onde >= 0)
+			throw new Exception("Impossível retirar todos os zeros da diagonal principal!");
 	}
 	
 	
@@ -171,10 +174,8 @@ public class Matriz {
 		for (int i = 0; i < linhas.size(); i++) {
 			if (i < 26)
 				ret += (char)(i + 'a');
-			else if (i < 52)
-				ret += (char)(i - 26 + 'A');
 			else
-				ret += "(x" + (i - 52) + ")";
+				ret += "(x" + (i) + ")";
 			ret += " = ";
 			ret += new DecimalFormat("##.###").format(linhas.get(i).getElem().get(linhas.get(i).getElem().size() - 1));
 			ret += "\n";
@@ -262,12 +263,7 @@ public class Matriz {
 							ret += " - ";
 					}
 					ret += new DecimalFormat("##.###").format(Math.abs(valor));
-					if (j < 26)
-						ret += (char)(j + 'a');
-					else if (j < 52)
-						ret += (char)(j - 26 + 'A');
-					else
-						ret += "(x" + (j - 52) + ")";
+					ret += (char)(j + 'a');
 					numValores++;
 				}
 			}
