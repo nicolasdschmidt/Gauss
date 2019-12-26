@@ -1,4 +1,7 @@
-﻿package gauss;
+﻿// Nícolas D. Schmidt	19191
+// Bruno A. Franchi		19164
+
+package gauss;
 
 /**
 * <h1>Gauss</h1>
